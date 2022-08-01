@@ -37,21 +37,8 @@ export class TodoService {
   }
 
   async createTodo(data) {
-    // generate random 4 digit number for the id
-    let randomId = Math.floor(1000 + Math.random() * 9000);
-    const isIdUnique = Todo.findOne({
-      where: { id: randomId },
-    });
-
-    while (await isIdUnique != null) {
-      randomId = Math.floor(1000 + Math.random() * 9000);
-      const isIdUnique = Todo.findOne({
-        where: { id: randomId },
-      });
-    }
-
     const newTodo = new this.todoModel({
-      id: randomId,
+      id: data.id,
       todo: data.todo,
     })
     newTodo.save()
